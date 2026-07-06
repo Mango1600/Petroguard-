@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetroGuard - Attendant Dashboard</title>
+</head>
+<body>
+
+  <h1>PetroGuard</h1>
+  <h2>Attendant Dashboard</h2>
+
+  <hr>
+
+  <p>Welcome, Attendant.</p>
+
+  <ul>
+    <li>Record Fuel Sales</li>
+    <li>Record Meter Readings</li>
+    <li>Customer Transactions</li>
+    <li>Submit Shift Report</li>
+  </ul>
+
+</body>
+</html>
