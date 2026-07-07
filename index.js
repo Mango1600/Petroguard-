@@ -1,7 +1,7 @@
 // =======================================================
 // PetroGuard
 // File: index.js
-// Version: 1.2.0
+// Version: 2.3.0
 // =======================================================
 
 require("dotenv").config();
@@ -18,12 +18,29 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
-// Home
+// =======================================================
+// HOME
+// =======================================================
+
 app.get("/", (req, res) => {
   res.send("PetroGuard API is running!");
 });
 
-// Login
+// =======================================================
+// HEALTH CHECK
+// =======================================================
+
+app.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "PetroGuard API is healthy"
+  });
+});
+
+// =======================================================
+// LOGIN
+// =======================================================
+
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -35,7 +52,6 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    // Authenticate with Supabase
     const { data: authData, error: authError } =
       await supabase.auth.signInWithPassword({
         email,
@@ -49,7 +65,6 @@ app.post("/login", async (req, res) => {
       });
     }
 
-    // Get user profile with role
     const { data: profile, error: profileError } =
       await supabase
         .from("profiles")
@@ -88,9 +103,39 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Server
+// =======================================================
+// STATIONS
+// =======================================================
+
+app.get("/stations", async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from("stations")
+      .select("*")
+      .order("id");
+
+    if (error) throw error;
+
+    res.json({
+      success: true,
+      count: data.length,
+      stations: data
+    });
+
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message
+    });
+  }
+});
+
+// =======================================================
+// SERVER
+// =======================================================
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`PetroGuard server running on port ${PORT}`);
+  console.log(`🚀 PetroGuard API running on port ${PORT}`);
 });
