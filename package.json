@@ -1,13 +1,21 @@
-x{
+{
   "name": "petroguard",
   "version": "1.0.0",
-  "description": "",
+  "description": "PetroGuard Backend API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "node index.js",
+    "test": "echo \"No tests specified\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "petroguard",
+    "fuel",
+    "supabase",
+    "express",
+    "petrol-station"
+  ],
+  "author": "Adewale Aderoju",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
